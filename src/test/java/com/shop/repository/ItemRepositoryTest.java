@@ -92,4 +92,26 @@ class ItemRepositoryTest {
             assertThat(item.getPrice()).isLessThan(10005);
         }
     }
+
+    @Test
+    @DisplayName("@Query를 이용한 상품 조회 테스트")
+    void findItemByItemDetailTest() {
+        this.createItemList();
+        List<Item> items = itemRepository.findItemByItemDetail("테스트 상품 상세 설명");
+        for (Item item : items) {
+            System.out.println(item.toString());
+            assertThat(item.getItemDetail()).startsWith("테스트 상품 상세 설명");
+        }
+    }
+
+    @Test
+    @DisplayName("nativeQuery 속성을 이용한 상품 조회 테스트")
+    void findItemByItemDetailByNativeTest() {
+        this.createItemList();
+        List<Item> items = itemRepository.findItemByItemDetailByNative("테스트 상품 상세 설명");
+        for (Item item : items) {
+            System.out.println(item.toString());
+            assertThat(item.getItemDetail()).startsWith("테스트 상품 상세 설명");
+        }
+    }
 }
