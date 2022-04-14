@@ -8,9 +8,9 @@ import lombok.ToString;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+@ToString
 @Getter
 @Setter
-@ToString
 @Table(name= "item")
 @Entity
 public class Item {
@@ -36,7 +36,6 @@ public class Item {
     @Enumerated(EnumType.STRING)
     private ItemSellStatus itemSellStatus;
 
-    private LocalDateTime regTime;
-
-    private LocalDateTime updateTime;
+    private LocalDateTime registeredTime;
+    private LocalDateTime updatedTime;
 }
