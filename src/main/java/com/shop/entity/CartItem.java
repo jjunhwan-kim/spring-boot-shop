@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Setter
 @Table(name = "cart_item")
 @Entity
-public class CartItem {
+public class CartItem extends BaseEntity {
 
     @Id
     @Column(name = "cart_item_id")

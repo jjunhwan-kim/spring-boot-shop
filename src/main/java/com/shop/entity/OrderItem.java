@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Setter
 @Table(name = "order_item")
 @Entity
-public class OrderItem {
+public class OrderItem extends BaseEntity {
 
     @Id
     @Column(name = "order_item_id")
@@ -30,7 +30,4 @@ public class OrderItem {
     private int orderPrice;
 
     private int count;
-
-    private LocalDateTime registeredTime;
-    private LocalDateTime updatedTime;
 }

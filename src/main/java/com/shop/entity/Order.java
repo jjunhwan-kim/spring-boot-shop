@@ -15,7 +15,7 @@ import java.util.List;
 @Setter
 @Table(name = "orders")
 @Entity
-public class Order {
+public class Order extends BaseEntity {
 
     @Id
     @Column(name = "order_id")
@@ -33,7 +33,4 @@ public class Order {
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<OrderItem> orderItems = new ArrayList<>();
-
-    private LocalDateTime registeredTime;
-    private LocalDateTime updatedTime;
 }

@@ -49,8 +49,8 @@ class OrderTest {
         item.setItemDetail("상세설명");
         item.setItemSellStatus(ItemSellStatus.SELL);
         item.setStockNumber(100);
-        item.setRegisteredTime(LocalDateTime.now());
-        item.setUpdatedTime(LocalDateTime.now());
+        item.setCreatedTime(LocalDateTime.now());
+        item.setModifiedTime(LocalDateTime.now());
         return item;
     }
 
