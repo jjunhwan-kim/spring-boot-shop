@@ -36,10 +36,10 @@
         .input-group {
             margin-bottom: 15px;
         }
-        .input-div {
+        .img-div {
             margin-bottom: 10px;
         }
-        .input-group {
+        .fieldError {
             color: #bd2130;
         }
     </style>
@@ -80,7 +80,7 @@
             <div class="input-group-prepend">
                 <span class="input-group-text">재고</span>
             </div>
-            <input type="number" th:field="*{stockNumber}" class="form-control" placeholder="상품명의 재고를 입력해주세요.">
+            <input type="number" th:field="*{stockNumber}" class="form-control" placeholder="상품의 재고를 입력해주세요.">
         </div>
         <p th:if="${#fields.hasErrors('stockNumber')}" th:errors="*{stockNumber}" class="fieldError">Incorrect data</p>
 

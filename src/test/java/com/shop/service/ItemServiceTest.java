@@ -6,7 +6,6 @@ import com.shop.entity.Item;
 import com.shop.entity.ItemImage;
 import com.shop.repository.ItemImageRepository;
 import com.shop.repository.ItemRepository;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +20,7 @@ import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 @TestPropertySource(locations = "classpath:application-test.properties")
@@ -67,11 +67,11 @@ class ItemServiceTest {
         List<ItemImage> itemImageList = itemImageRepository.findByItemIdOrderByIdAsc(itemId);
         Item item = itemRepository.findById(itemId).orElseThrow(EntityNotFoundException::new);
 
-        Assertions.assertThat(itemFormDto.getItemName()).isEqualTo(item.getItemName());
-        Assertions.assertThat(itemFormDto.getItemSellStatus()).isEqualTo(item.getItemSellStatus());
-        Assertions.assertThat(itemFormDto.getItemDetail()).isEqualTo(item.getItemDetail());
-        Assertions.assertThat(itemFormDto.getPrice()).isEqualTo(item.getPrice());
-        Assertions.assertThat(itemFormDto.getStockNumber()).isEqualTo(item.getStockNumber());
-        Assertions.assertThat(multipartFileList.get(0).getOriginalFilename()).isEqualTo(itemImageList.get(0).getOriginalImageName());
+        assertThat(itemFormDto.getItemName()).isEqualTo(item.getItemName());
+        assertThat(itemFormDto.getItemSellStatus()).isEqualTo(item.getItemSellStatus());
+        assertThat(itemFormDto.getItemDetail()).isEqualTo(item.getItemDetail());
+        assertThat(itemFormDto.getPrice()).isEqualTo(item.getPrice());
+        assertThat(itemFormDto.getStockNumber()).isEqualTo(item.getStockNumber());
+        assertThat(multipartFileList.get(0).getOriginalFilename()).isEqualTo(itemImageList.get(0).getOriginalImageName());
     }
 }
