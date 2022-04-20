@@ -20,7 +20,7 @@ import static com.shop.entity.QItem.item;
 
 public class ItemRepositoryCustomImpl implements ItemRepositoryCustom {
 
-    private JPAQueryFactory queryFactory;
+    private final JPAQueryFactory queryFactory;
 
     public ItemRepositoryCustomImpl(EntityManager em) {
         this.queryFactory = new JPAQueryFactory(em);
