@@ -1,10 +1,12 @@
 package com.shop.repository;
 
+import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.shop.constant.ItemSellStatus;
 import com.shop.dto.ItemSearchDto;
+import com.shop.dto.MainItemDto;
 import com.shop.entity.Item;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,6 +19,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import static com.shop.entity.QItem.item;
+import static com.shop.entity.QItemImage.itemImage;
 
 public class ItemRepositoryCustomImpl implements ItemRepositoryCustom {
 
@@ -76,6 +79,31 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom {
                 .where(createdDateAfter(itemSearchDto.getSearchDateType()),
                         searchSellStatusEq(itemSearchDto.getSearchSellStatus()),
                         searchByLike(itemSearchDto.getSearchBy(), itemSearchDto.getSearchQuery()));
+
+        return PageableExecutionUtils.getPage(content, pageable, countQuery::fetchOne);
+    }
+
+    private BooleanExpression itemNameLike(String searchQuery) {
+        return StringUtils.isEmpty(searchQuery) ? null : item.itemName.like("%" + searchQuery + "%");
+    }
+
+    @Override
+    public Page<MainItemDto> getMainItemPage(ItemSearchDto itemSearchDto, Pageable pageable) {
+        List<MainItemDto> content = queryFactory.select(Projections.constructor(MainItemDto.class, item.id, item.itemName, item.itemDetail, itemImage.imageUrl, item.price))
+                .from(itemImage)
+                .join(itemImage.item, item)
+                .where(itemImage.representativeImageYesOrNo.eq("Y"))
+                .where(itemNameLike(itemSearchDto.getSearchQuery()))
+                .orderBy(item.id.desc())
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetch();
+
+        JPAQuery<Long> countQuery = queryFactory.select(item.count())
+                .from(itemImage)
+                .join(itemImage.item, item)
+                .where(itemImage.representativeImageYesOrNo.eq("Y"))
+                .where(itemNameLike(itemSearchDto.getSearchQuery()));
 
         return PageableExecutionUtils.getPage(content, pageable, countQuery::fetchOne);
     }
