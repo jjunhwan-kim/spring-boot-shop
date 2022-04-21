@@ -54,7 +54,7 @@
     </style>
 </th:block>
 
-<div layout:fragment="content" stype="margin-left: 25%; margin-right: 25%">
+<div layout:fragment="content" stype="margin-left: 25%; margin-right: 25%;">
 
     <input type="hidden" id="itemId" th:value="${item.id}">
 
@@ -91,7 +91,7 @@
                 <h3 name="totalPrice" id="totalPrice" class="font-weight-bold"></h3>
             </div>
             <div th:if="${item.itemSellStatus == T(com.shop.constant.ItemSellStatus).SELL}" class="text-right">
-                <button type="button" class="btn btn-right border border-primary btn-lg">장바구니 담기</button>
+                <button type="button" class="btn btn-light border border-primary btn-lg">장바구니 담기</button>
                 <button type="button" class="btn btn-primary btn-lg">주문하기</button>
             </div>
             <div th:unless="${item.itemSellStatus == T(com.shop.constant.ItemSellStatus).SELL}" class="text-right">
