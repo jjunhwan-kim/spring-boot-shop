@@ -17,7 +17,7 @@ public class ItemImageDto {
 
     private String imageUrl;
 
-    private String representativeImageYesOrNo;
+    private String representativeImage;
 
     private static ModelMapper modelMapper = new ModelMapper();
 

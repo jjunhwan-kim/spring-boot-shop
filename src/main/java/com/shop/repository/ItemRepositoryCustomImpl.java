@@ -92,7 +92,7 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom {
         List<MainItemDto> content = queryFactory.select(Projections.constructor(MainItemDto.class, item.id, item.itemName, item.itemDetail, itemImage.imageUrl, item.price))
                 .from(itemImage)
                 .join(itemImage.item, item)
-                .where(itemImage.representativeImageYesOrNo.eq("Y"))
+                .where(itemImage.representativeImage.eq("Y"))
                 .where(itemNameLike(itemSearchDto.getSearchQuery()))
                 .orderBy(item.id.desc())
                 .offset(pageable.getOffset())
@@ -102,7 +102,7 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom {
         JPAQuery<Long> countQuery = queryFactory.select(item.count())
                 .from(itemImage)
                 .join(itemImage.item, item)
-                .where(itemImage.representativeImageYesOrNo.eq("Y"))
+                .where(itemImage.representativeImage.eq("Y"))
                 .where(itemNameLike(itemSearchDto.getSearchQuery()));
 
         return PageableExecutionUtils.getPage(content, pageable, countQuery::fetchOne);

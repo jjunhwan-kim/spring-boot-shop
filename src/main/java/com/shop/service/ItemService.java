@@ -38,9 +38,9 @@ public class ItemService {
             ItemImage itemImage = new ItemImage();
             itemImage.setItem(item);
             if (i == 0) {
-                itemImage.setRepresentativeImageYesOrNo("Y");
+                itemImage.setRepresentativeImage("Y");
             } else {
-                itemImage.setRepresentativeImageYesOrNo("N");
+                itemImage.setRepresentativeImage("N");
             }
             itemImageService.saveItemImage(itemImage, itemImageFileList.get(i));
         }
