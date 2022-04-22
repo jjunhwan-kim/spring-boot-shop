@@ -21,6 +21,7 @@ import javax.persistence.EntityNotFoundException;
 
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 @TestPropertySource(locations = "classpath:application-test.properties")
@@ -74,6 +75,6 @@ class OrderServiceTest {
 
         int totalPrice = orderDto.getCount() * item.getPrice();
 
-        Assertions.assertThat(totalPrice).isEqualTo(order.getTotalPrice());
+        assertThat(totalPrice).isEqualTo(order.getTotalPrice());
     }
 }

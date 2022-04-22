@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,7 +49,7 @@ public class ItemController {
 
         try {
             itemService.saveItem(itemFormDto, itemImageFileList);
-        } catch (Exception e) {
+        } catch (IOException e) {
             model.addAttribute("errorMessage", "상품 등록 중 에러가 발생하였습니다.");
             return "item/itemForm";
         }
@@ -83,7 +84,7 @@ public class ItemController {
         }
         try {
             itemService.updateItem(itemFormDto, itemImageFileList);
-        } catch (Exception e) {
+        } catch (IOException e) {
             model.addAttribute("errorMessage", "상품 수정 중 에러가 발생하였습니다.");
             return "item/itemForm";
         }

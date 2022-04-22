@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EntityNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class ItemService {
     private final ItemImageService itemImageService;
     private final ItemImageRepository itemImageRepository;
 
-    public Long saveItem(ItemFormDto itemFormDto, List<MultipartFile> itemImageFileList) throws Exception {
+    public Long saveItem(ItemFormDto itemFormDto, List<MultipartFile> itemImageFileList) throws IOException {
 
         Item item = itemFormDto.createItem();
         itemRepository.save(item);
@@ -62,7 +63,7 @@ public class ItemService {
         return itemFormDto;
     }
 
-    public Long updateItem(ItemFormDto itemFormDto, List<MultipartFile> itemImageFileList) throws Exception {
+    public Long updateItem(ItemFormDto itemFormDto, List<MultipartFile> itemImageFileList) throws IOException {
 
         Item item = itemRepository.findById(itemFormDto.getId()).orElseThrow(EntityNotFoundException::new);
         item.updateItem(itemFormDto);
