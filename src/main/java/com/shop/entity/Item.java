@@ -8,6 +8,8 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @ToString
 @Getter
@@ -36,6 +38,9 @@ public class Item extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     private ItemSellStatus itemSellStatus;
+
+    @OneToMany(mappedBy = "item", fetch = FetchType.LAZY)
+    private List<ItemImage> itemImages = new ArrayList<>();
 
     public void updateItem(ItemFormDto itemFormDto) {
         this.itemName = itemFormDto.getItemName();
