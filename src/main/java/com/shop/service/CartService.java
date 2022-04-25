@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.thymeleaf.util.StringUtils;
 
-import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +30,7 @@ public class CartService {
     private final CartItemRepository cartItemRepository;
 
     public Long addCart(CartItemDto cartItemDto, String email) {
-        Item item = itemRepository.findById(cartItemDto.getItemId()).orElseThrow(EntityExistsException::new);
+        Item item = itemRepository.findById(cartItemDto.getItemId()).orElseThrow(EntityNotFoundException::new);
         Member member = memberRepository.findByEmail(email);
 
         Cart cart = cartRepository.findByMemberId(member.getId());
@@ -86,8 +85,8 @@ public class CartService {
         cartItem.updateCount(count);
     }
 
-    public void deleteCartItem(Long carITemId) {
-        CartItem cartItem = cartItemRepository.findById(carITemId).orElseThrow(EntityNotFoundException::new);
+    public void deleteCartItem(Long carItemId) {
+        CartItem cartItem = cartItemRepository.findById(carItemId).orElseThrow(EntityNotFoundException::new);
         cartItemRepository.delete(cartItem);
     }
 }

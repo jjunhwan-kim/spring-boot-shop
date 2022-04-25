@@ -16,7 +16,7 @@
 
             var url = "/order/" + orderId + "/cancel";
             var paramData = {
-                itemId : orderId,
+                orderId : orderId,
             };
 
             var param = JSON.stringify(paramData);
@@ -120,7 +120,7 @@
         <ul class="pagination justify-content-center">
             <li class="page-item" th:classappend="${orders.first} ? 'disabled'">
                 <a th:href="@{'/orders/' + ${orders.number - 1}}" aria-label="Previous" class="page-link">
-                    <span area-hidden="true">Previous</span>
+                    <span aria-hidden="true">Previous</span>
                 </a>
             </li>
             <li class="page-item" th:each="page : ${#numbers.sequence(start, end)}" th:classappend="${orders.number eq page - 1} ? 'active'">
@@ -130,7 +130,7 @@
             </li>
             <li class="page-item" th:classappend="${orders.last} ? 'disabled'">
                 <a th:href="@{'/orders/' + ${orders.number + 1}}" aria-label="Next" class="page-link">
-                    <span area-hidden="true">Next</span>
+                    <span aria-hidden="true">Next</span>
                 </a>
             </li>
         </ul>

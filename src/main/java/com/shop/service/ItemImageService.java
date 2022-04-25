@@ -43,7 +43,7 @@ public class ItemImageService {
         if (!itemImageFile.isEmpty()) {
             ItemImage savedItemImage = itemImageRepository.findById(itemImageId).orElseThrow(EntityNotFoundException::new);
             if (!StringUtils.isEmpty(savedItemImage.getImageName())) {
-                fileService.deleteFile(itemImageLocation + '/' + savedItemImage.getImageName());
+                fileService.deleteFile(itemImageLocation + "/" + savedItemImage.getImageName());
             }
 
             String originalImageName = itemImageFile.getOriginalFilename();
